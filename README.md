@@ -5,7 +5,7 @@ A Python-based project designed to transform a set of linearly independent vecto
 1. Aviles, Joan Kathleen
 2. Borilla, Johnrex Mecleod
 3. Guiang, Stephanie Mae
-4. Silva, Chelsey Rei
+4. Silva, Chelsey Claire
 5. Teston, Michelle
 
 ##Key Features
