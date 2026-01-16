@@ -99,15 +99,11 @@ def main():
                             decimal_values = [float(x.evalf()) for x in sym_vec]
                             for val in decimal_values:
                                 
-                                # --- INTELLIGENT ROUNDING LOGIC ---
                                 rounded_val = round(val, 6)
-                                
-                                # Check if it is a whole number (e.g. 1.0, 0.0)
+
                                 if rounded_val.is_integer():
-                                    # Format as integer (0 decimal places)
                                     fmt_string = '%.0f'
                                 else:
-                                    # Keep 6 decimal places for non-integers
                                     fmt_string = '%.6f'
 
                                 with ui.card().classes(box_style):
