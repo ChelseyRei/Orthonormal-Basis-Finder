@@ -5,6 +5,20 @@ from ortho_logic import gram_schmidt_symbolic
 def main():
     vector_input_fields = []
 
+    def reset_app():
+        num_vecs_input.value = 2
+        dim_input.value = 3
+        
+        vector_input_fields.clear()
+        
+        input_area.clear()
+        input_area.set_visibility(False)
+        
+        results_area.clear()
+        results_area.set_visibility(False)
+        
+        ui.notify('Application reset.', type='info')
+
     def create_input_grid():
         try:
             n_vectors = int(num_vecs_input.value)
@@ -33,7 +47,9 @@ def main():
                             col_inputs.append(field)
                         vector_input_fields.append(col_inputs)
 
-            ui.button('Calculate Basis', on_click=run_calculation).classes('bg-green-600 text-white w-full')
+            with ui.row().classes('w-full gap-4'):
+                ui.button('Calculate Basis', on_click=run_calculation).classes('bg-green-600 text-white flex-grow')
+                ui.button('Reset', on_click=reset_app).classes('bg-slate-400 text-white w-32')
 
     def format_plain_text(val):
         s = str(val)
@@ -64,7 +80,10 @@ def main():
             results_area.set_visibility(True)
             
             with results_area:
-                ui.label('3. Results').classes('text-xl font-bold mb-4')
+                ui.label('3. Results').classes('text-xl font-bold mb-2')
+                
+                ui.label("Therefore, the Gram-Schmidt Process produced the following orthonormal basis for the subspace spanned by the given vectors:") \
+                    .classes('text-md text-slate-700 mb-6 italic')
 
                 box_style = 'min-w-[7rem] max-w-[15rem] w-auto min-h-[2.5rem] p-4 flex items-center justify-center border border-gray-300 rounded shadow-none bg-gray-50'
 
@@ -90,7 +109,6 @@ def main():
                             ui.label(',').classes('text-4xl font-bold -mt-2 flex-none mx-2')
 
                     ui.element('div').classes('w-8 shrink-0')
-
                     ui.label('}').classes('text-2xl font-bold flex-none')
 
                 ui.separator()
@@ -124,7 +142,6 @@ def main():
                              ui.label(',').classes('text-4xl font-bold -mt-2 flex-none mx-2')
 
                     ui.element('div').classes('w-8 shrink-0')
-                    
                     ui.label('}').classes('text-2xl font-bold flex-none')
 
         except ValueError as e:
@@ -136,10 +153,12 @@ def main():
         
         with ui.card().classes('w-full max-w-5xl bg-slate-50'):
             ui.label('1. Configuration').classes('text-xl font-bold text-slate-800')
-            with ui.row().classes('w-full gap-4'):
+            
+            with ui.row().classes('w-full gap-4 items-end'):
                 num_vecs_input = ui.number('How many vectors?', value=2, min=1, precision=0).classes('w-40')
                 dim_input = ui.number('Dimensions per vector?', value=3, min=1, precision=0).classes('w-40')
-                ui.button('Generate Inputs', on_click=create_input_grid).classes('mt-2 bg-blue-600 text-white')
+                
+                ui.button('Generate Inputs', on_click=create_input_grid).classes('bg-blue-600 text-white')
 
         input_area = ui.card().classes('w-full max-w-5xl')
         input_area.set_visibility(False)
