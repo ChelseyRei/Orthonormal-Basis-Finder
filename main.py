@@ -269,6 +269,32 @@ def main():
                     sanitize=False
                 )
 
+                ui.separator()
+                ui.label('Export Result').classes(SUBSECTION_HEADER_MARGIN_TOP)
+                
+                with ui.row().classes('w-full gap-4'):
+                    
+                    def copy_python_code():
+                        code = "import numpy as np\n\n"
+                        var_names = []
+                        for i, vec in enumerate(basis):
+                            vals = [f"{float(v.evalf()):.8f}" for v in vec]
+                            vec_str = f"e{i+1} = np.array([{', '.join(vals)}])"
+                            code += vec_str + "\n"
+                            var_names.append(f"e{i+1}")
+                        code += f"\n# Orthonormal Basis Matrix (Columns)\nQ = np.column_stack([{', '.join(var_names)}])"
+                        
+                        ui.clipboard.write(code)
+                        ui.notify('Python/NumPy code copied to clipboard!', type='positive')
+
+                    def copy_latex_code():
+                        latex_code = f"\\left\\{{ {basis_str} \\right\\}}"
+                        ui.clipboard.write(latex_code)
+                        ui.notify('LaTeX code copied to clipboard!', type='positive')
+
+                    ui.button('Copy as Python Code', on_click=copy_python_code, icon='code').classes('bg-slate-700 text-white')
+                    ui.button('Copy as LaTeX', on_click=copy_latex_code, icon='content_copy').classes('bg-slate-600 text-white')
+
                 n_dim = int(dim_input.value)
                 
                 if n_dim in [2, 3]:
