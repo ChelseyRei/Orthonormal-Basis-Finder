@@ -58,7 +58,7 @@ def main():
                 for i in range(n_vectors):
                     with ui.column().classes(VECTOR_COLUMN):
                         
-                        ui.html(f'<div style="{VECTOR_LABEL}">vector v{i+1}</div>', sanitize=False)
+                        ui.html(f'<div style="{VECTOR_LABEL}">$$ v_{{{i+1}}} $$</div>', sanitize=False)
                         
                         col_inputs = []
                         for j in range(n_dim):
@@ -69,6 +69,8 @@ def main():
             with ui.row().classes(BUTTON_ROW):
                 ui.button('Calculate Basis', on_click=run_calculation).classes(BUTTON_CALCULATE)
                 ui.button('Reset', on_click=reset_app).classes(BUTTON_RESET)
+        
+        ui.run_javascript('renderMath();')
 
     def parse_user_input(user_input):
         normalized = user_input.strip()
@@ -266,6 +268,55 @@ def main():
                     ''',
                     sanitize=False
                 )
+
+                n_dim = int(dim_input.value)
+                
+                if n_dim in [2, 3]:
+                    ui.separator()
+                    ui.label('Visual Verification (2D/3D)').classes(SUBSECTION_HEADER_MARGIN_TOP)
+                    
+                    traces = []
+
+                    for i, vec in enumerate(raw_vectors):
+                        coords = [float(val.evalf()) for val in vec]
+                        if n_dim == 2: coords.append(0.0) 
+                        
+                        traces.append({
+                            'type': 'scatter3d',
+                            'mode': 'lines+markers',
+                            'x': [0, coords[0]], 'y': [0, coords[1]], 'z': [0, coords[2]],
+                            'line': {'color': 'red', 'width': 5, 'dash': 'dash'},
+                            'marker': {'size': 4, 'color': 'red'},
+                            'name': f'Input v{i+1}'
+                        })
+
+                    for i, vec in enumerate(basis):
+                        coords = [float(val.evalf()) for val in vec]
+                        if n_dim == 2: coords.append(0.0) 
+                        
+                        traces.append({
+                            'type': 'scatter3d',
+                            'mode': 'lines+markers',
+                            'x': [0, coords[0]], 'y': [0, coords[1]], 'z': [0, coords[2]],
+                            'line': {'color': 'green', 'width': 8},
+                            'marker': {'size': 6, 'color': 'green'},
+                            'name': f'Basis e{i+1}'
+                        })
+
+                    ui.plotly({
+                        'data': traces,
+                        'layout': {
+                            'margin': {'l': 0, 'r': 0, 't': 0, 'b': 0},
+                            'scene': {
+                                'xaxis': {'title': 'X'},
+                                'yaxis': {'title': 'Y'},
+                                'zaxis': {'title': 'Z'},
+                                'aspectmode': 'data' 
+                            },
+                            'showlegend': True,
+                            'height': 500,
+                        }
+                    }).classes('w-full h-[500px] border rounded bg-slate-50')
 
                 ui.run_javascript('renderMath();')
 
