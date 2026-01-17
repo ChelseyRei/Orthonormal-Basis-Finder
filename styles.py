@@ -1,24 +1,24 @@
 # Main layout styles
 MAIN_CONTAINER = 'w-full items-center p-30 space-y-6 min-h-screen text-slate-800'
 CARD_FULL_WIDTH = 'w-full max-w-5xl'
-CONFIG_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-8'
-INPUT_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-8' 
-RESULTS_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-8'
+CONFIG_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-4 md:p-8'
+INPUT_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-4 md:p-8' 
+RESULTS_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-4 md:p-8'
 
 # Header/Label styles
-CONFIG_HEADER = 'text-6xl p-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
+CONFIG_HEADER = 'text-6xl md:text-3xl p-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
 SECTION_HEADER = 'text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
 RESULT_INSTRUCTION = 'text-md text-slate-600 mb-8 italic bg-violet-50 p-4 rounded-lg border-l-4 border-violet-500'
 SUBSECTION_HEADER = 'text-lg text-slate-700 font-bold mb-4 flex items-center gap-2'
 SUBSECTION_HEADER_MARGIN_TOP = 'text-lg text-slate-700 font-bold mt-10 mb-4 flex items-center gap-2'
 
 # Input styles
-INPUT_ROW = 'w-full gap-6 items-end'
+INPUT_ROW = 'w-full gap-4 flex flex-wrap items-end'
 INPUT_FIELD_WIDTH = 'w-40'
 VECTOR_LABEL = 'font-size: 1.1rem; font-weight: 700; color: #475569; margin-bottom: 0.25rem;'
 INPUT_GRID = 'gap-6 mb-6 items-start'
 VECTOR_COLUMN = 'items-center gap-3 p-4 bg-violet-200 rounded-lg shadow-sm'
-INPUT_FIELD = 'w-28 bg-violet-200 shadow-sm'
+INPUT_FIELD = 'w-22 rounded-md bg-violet-200 shadow-sm'
 
 # Button styles
 BUTTON_GENERATE = '!bg-violet-500 hover:bg-violet-600 text-white font-medium rounded shadow-md transition-colors'
@@ -38,7 +38,7 @@ RESULT_BOX_LABEL = 'text-sm break-all text-center leading-tight font-medium text
 RESULT_COLUMN = 'gap-2 flex-none'
 
 # Vector notation styles
-VECTOR_NOTATION_ROW = 'items-center gap-0 flex-nowrap overflow-x-auto p-6 w-full min-w-0 bg-slate-50/50 rounded-xl '
+VECTOR_NOTATION_ROW = 'items-center gap-0 flex-nowrap overflow-x-auto p-6 w-full min-w-0 bg-slate-50/50 rounded-xl'
 VECTOR_OPENING_BRACE = 'text-3xl font-bold text-slate-400 whitespace-nowrap flex-none mr-4'
 VECTOR_COMMA = 'text-4xl font-bold text-slate-300 -mt-2 flex-none mx-3'
 VECTOR_CLOSING_BRACKET = 'w-8 shrink-0'

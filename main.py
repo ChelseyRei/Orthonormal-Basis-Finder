@@ -22,6 +22,7 @@ ui.add_head_html('''
 ''')
 
 def main():
+    #ui.query('body').classes('bg-gradient-to-br from-white-50 via-purple-200 to-indigo-300 min-h-screen')
     ui.add_css('''
         .nicegui-content { 
             padding: 0;
@@ -62,18 +63,18 @@ def main():
 
         with input_area:
             ui.label('Enter Values').classes(SECTION_HEADER)
-            
-            with ui.grid(columns=n_vectors).classes(INPUT_GRID):
-                for i in range(n_vectors):
-                    with ui.column().classes(VECTOR_COLUMN):
-                        
-                        ui.html(f'<div style="{VECTOR_LABEL}">$$ v_{{{i+1}}} $$</div>', sanitize=False)
-                        
-                        col_inputs = []
-                        for j in range(n_dim):
-                            field = ui.input().props('outlined dense input-style="text-align: center"').classes(INPUT_FIELD)
-                            col_inputs.append(field)
-                        vector_input_fields.append(col_inputs)
+            with ui.scroll_area().classes('w-full pb-4'):
+                with ui.grid(columns=n_vectors).classes(INPUT_GRID):
+                    for i in range(n_vectors):
+                        with ui.column().classes(VECTOR_COLUMN):
+                            
+                            ui.html(f'<div style="{VECTOR_LABEL}">$$ v_{{{i+1}}} $$</div>', sanitize=False)
+                            
+                            col_inputs = []
+                            for j in range(n_dim):
+                                field = ui.input().props('outlined dense input-style="text-align: center"').classes(INPUT_FIELD)
+                                col_inputs.append(field)
+                            vector_input_fields.append(col_inputs)
 
             with ui.row().classes(BUTTON_ROW):
                 ui.button('Calculate Basis', on_click=run_calculation).classes(BUTTON_CALCULATE)
@@ -379,8 +380,8 @@ def main():
         results_area = ui.card().classes(RESULTS_AREA_CARD)
         results_area.set_visibility(False)
 
-    with ui.footer().classes('!bg-transparent bg-transparent pb-6'):
-        with ui.column().classes(' gap-0.5'):
+    with ui.footer().classes('!bg-[#EEF2FF] pb-6 border-none shadow-none'):
+        with ui.column().classes('gap-0.5'):
             ui.label('DEVELOPERS').classes('font-extrabold text-slate-800 text-base tracking-widest mb-2')
             
             ui.label('Aviles, Joan Kathleen').classes('text-base text-slate-600 font-medium')
@@ -388,6 +389,7 @@ def main():
             ui.label('Guiang, Stephanie Mae').classes('text-base text-slate-600 font-medium')
             ui.label('Silva, Chelsey Claire').classes('text-base text-slate-600 font-medium')
             ui.label('Teston, Michelle').classes('text-base text-slate-600 font-medium')
+    
     ui.run(title="Orthonormal Basis Finder")
 
 if __name__ in {"__main__", "__mp_main__"}:
