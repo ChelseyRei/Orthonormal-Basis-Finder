@@ -1,6 +1,7 @@
 from nicegui import ui
 import sympy
 from ortho_logic import gram_schmidt_symbolic
+from styles import *
 
 def main():
     vector_input_fields = []
@@ -33,23 +34,23 @@ def main():
         input_area.set_visibility(True)
 
         with input_area:
-            ui.label('2. Enter Values').classes('text-xl font-bold mb-2')
+            ui.label('2. Enter Values').classes(SECTION_HEADER)
             
-            with ui.grid(columns=n_vectors).classes('gap-6 mb-4 items-start'):
+            with ui.grid(columns=n_vectors).classes(INPUT_GRID):
                 for i in range(n_vectors):
-                    with ui.column().classes('items-center gap-2'):
+                    with ui.column().classes(VECTOR_COLUMN):
                         
-                        ui.html(f'<div style="font-size: 1.25rem; font-weight: bold;">vector v{i+1}</div>', sanitize=False)
+                        ui.html(f'<div style="{VECTOR_LABEL}">vector v{i+1}</div>', sanitize=False)
                         
                         col_inputs = []
                         for j in range(n_dim):
-                            field = ui.input().props('outlined dense input-style="text-align: center"').classes('w-28')
+                            field = ui.input().props('outlined dense input-style="text-align: center"').classes(INPUT_FIELD)
                             col_inputs.append(field)
                         vector_input_fields.append(col_inputs)
 
-            with ui.row().classes('w-full gap-4'):
-                ui.button('Calculate Basis', on_click=run_calculation).classes('bg-green-600 text-white flex-grow')
-                ui.button('Reset', on_click=reset_app).classes('bg-slate-400 text-white w-32')
+            with ui.row().classes(BUTTON_ROW):
+                ui.button('Calculate Basis', on_click=run_calculation).classes(BUTTON_CALCULATE)
+                ui.button('Reset', on_click=reset_app).classes(BUTTON_RESET)
 
     def format_plain_text(val):
         s = str(val)
@@ -80,47 +81,47 @@ def main():
             results_area.set_visibility(True)
             
             with results_area:
-                ui.label('3. Results').classes('text-xl font-bold mb-2')
+                ui.label('3. Results').classes(SECTION_HEADER)
                 
                 ui.label("Therefore, the Gram-Schmidt Process produced the following orthonormal basis for the subspace spanned by the given vectors:") \
-                    .classes('text-md text-slate-700 mb-6 italic')
+                    .classes(RESULT_INSTRUCTION)
 
-                box_style = 'min-w-[7rem] max-w-[15rem] w-auto min-h-[2.5rem] p-4 flex items-center justify-center border border-gray-300 rounded shadow-none bg-gray-50'
+                box_style = RESULT_BOX
 
-                ui.label('Exact Form (Symbolic):').classes('text-lg text-slate-600 font-bold mb-2')
+                ui.label('Exact Form (Symbolic):').classes(SUBSECTION_HEADER)
 
-                with ui.row().classes('items-center gap-0 flex-nowrap overflow-x-auto p-4 w-full min-w-0'):
+                with ui.row().classes(VECTOR_NOTATION_ROW):
                     
                     indices = [str(k+1) for k in range(len(basis))]
                     v_labels = ", ".join([f"vector v{k}" for k in indices])
                     
-                    ui.label(f"{{ {v_labels} }} = {{").classes('text-2xl font-bold whitespace-nowrap flex-none mr-4')
+                    ui.label(f"{{ {v_labels} }} = {{").classes(VECTOR_OPENING_BRACE)
 
                     for i, sym_vec in enumerate(basis):
                         
-                        with ui.column().classes('gap-1 flex-none'):
+                        with ui.column().classes(RESULT_COLUMN):
                             for val in sym_vec:
                                 text_str = format_plain_text(val)
                                 
                                 with ui.card().classes(box_style):
-                                    ui.label(text_str).classes('text-sm break-all text-center leading-tight')
+                                    ui.label(text_str).classes(RESULT_BOX_LABEL)
                         
                         if i < len(basis) - 1:
-                            ui.label(',').classes('text-4xl font-bold -mt-2 flex-none mx-2')
+                            ui.label(',').classes(VECTOR_COMMA)
 
-                    ui.element('div').classes('w-8 shrink-0')
-                    ui.label('}').classes('text-2xl font-bold flex-none')
+                    ui.element('div').classes(VECTOR_CLOSING_BRACKET)
+                    ui.label('}').classes(VECTOR_CLOSING_BRACE)
 
                 ui.separator()
 
-                ui.label('Decimal Approximation:').classes('text-lg text-slate-600 font-bold mt-4 mb-2')
+                ui.label('Decimal Approximation:').classes(SUBSECTION_HEADER_MARGIN_TOP)
 
-                with ui.row().classes('items-center gap-0 flex-nowrap overflow-x-auto p-4 w-full min-w-0'):
+                with ui.row().classes(VECTOR_NOTATION_ROW):
                     
-                    ui.label(f"{{ {v_labels} }} ≈ {{").classes('text-2xl font-bold whitespace-nowrap flex-none mr-4')
+                    ui.label(f"{{ {v_labels} }} ≈ {{").classes(VECTOR_OPENING_BRACE)
 
                     for i, sym_vec in enumerate(basis):
-                        with ui.column().classes('gap-1 flex-none'):
+                        with ui.column().classes(RESULT_COLUMN):
                             
                             for val in sym_vec:
                                 approx = val.evalf()
@@ -136,34 +137,34 @@ def main():
                                     display_str = str(approx)
 
                                 with ui.card().classes(box_style):
-                                    ui.label(display_str).classes('text-sm break-all text-center leading-tight')
+                                    ui.label(display_str).classes(RESULT_BOX_LABEL)
                         
                         if i < len(basis) - 1:
-                             ui.label(',').classes('text-4xl font-bold -mt-2 flex-none mx-2')
+                             ui.label(',').classes(VECTOR_COMMA)
 
-                    ui.element('div').classes('w-8 shrink-0')
-                    ui.label('}').classes('text-2xl font-bold flex-none')
+                    ui.element('div').classes(VECTOR_CLOSING_BRACKET)
+                    ui.label('}').classes(VECTOR_CLOSING_BRACE)
 
         except ValueError as e:
             ui.notify(str(e), type='warning')
         except Exception as e:
             ui.notify(f"Error: {e}", type='negative')
 
-    with ui.column().classes('w-full items-center p-10 space-y-4'):
+    with ui.column().classes(MAIN_CONTAINER):
         
-        with ui.card().classes('w-full max-w-5xl bg-slate-50'):
-            ui.label('1. Configuration').classes('text-xl font-bold text-slate-800')
+        with ui.card().classes(CONFIG_CARD):
+            ui.label('1. Configuration').classes(CONFIG_HEADER)
             
-            with ui.row().classes('w-full gap-4 items-end'):
-                num_vecs_input = ui.number('How many vectors?', value=2, min=1, precision=0).classes('w-40')
-                dim_input = ui.number('Dimensions per vector?', value=3, min=1, precision=0).classes('w-40')
+            with ui.row().classes(INPUT_ROW):
+                num_vecs_input = ui.number('How many vectors?', value=2, min=1, precision=0).classes(INPUT_FIELD_WIDTH)
+                dim_input = ui.number('Dimensions per vector?', value=3, min=1, precision=0).classes(INPUT_FIELD_WIDTH)
                 
-                ui.button('Generate Inputs', on_click=create_input_grid).classes('bg-blue-600 text-white')
+                ui.button('Generate Inputs', on_click=create_input_grid).classes(BUTTON_GENERATE)
 
-        input_area = ui.card().classes('w-full max-w-5xl')
+        input_area = ui.card().classes(INPUT_AREA_CARD)
         input_area.set_visibility(False)
 
-        results_area = ui.card().classes('w-full max-w-5xl bg-white')
+        results_area = ui.card().classes(RESULTS_AREA_CARD)
         results_area.set_visibility(False)
 
     ui.run(title="Exact Basis Finder")
