@@ -3,6 +3,7 @@ import sympy
 from ortho_logic import gram_schmidt_with_steps
 from styles import *
 
+ui.run(native=True, reload=False)
 ui.add_head_html('''
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
