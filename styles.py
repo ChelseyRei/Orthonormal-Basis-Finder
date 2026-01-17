@@ -6,7 +6,7 @@ INPUT_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-8'
 RESULTS_AREA_CARD = 'w-full max-w-5xl bg-violet-100 rounded-xl shadow-lg p-8'
 
 # Header/Label styles
-CONFIG_HEADER = 'text-3xl p-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
+CONFIG_HEADER = 'text-6xl p-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
 SECTION_HEADER = 'text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-900 to-violet-500 mb-2'
 RESULT_INSTRUCTION = 'text-md text-slate-600 mb-8 italic bg-violet-50 p-4 rounded-lg border-l-4 border-violet-500'
 SUBSECTION_HEADER = 'text-lg text-slate-700 font-bold mb-4 flex items-center gap-2'
@@ -43,3 +43,4 @@ VECTOR_OPENING_BRACE = 'text-3xl font-bold text-slate-400 whitespace-nowrap flex
 VECTOR_COMMA = 'text-4xl font-bold text-slate-300 -mt-2 flex-none mx-3'
 VECTOR_CLOSING_BRACKET = 'w-8 shrink-0'
 VECTOR_CLOSING_BRACE = 'text-3xl font-bold text-slate-400 flex-none ml-4'
+

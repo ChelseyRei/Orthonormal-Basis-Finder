@@ -379,6 +379,15 @@ def main():
         results_area = ui.card().classes(RESULTS_AREA_CARD)
         results_area.set_visibility(False)
 
+    with ui.footer().classes('!bg-transparent bg-transparent pb-6'):
+        with ui.column().classes(' gap-0.5'):
+            ui.label('DEVELOPERS').classes('font-extrabold text-slate-800 text-base tracking-widest mb-2')
+            
+            ui.label('Aviles, Joan Kathleen').classes('text-base text-slate-600 font-medium')
+            ui.label('Borilla, Johnrex Mecleod').classes('text-base text-slate-600 font-medium')
+            ui.label('Guiang, Stephanie Mae').classes('text-base text-slate-600 font-medium')
+            ui.label('Silva, Chelsey Claire').classes('text-base text-slate-600 font-medium')
+            ui.label('Teston, Michelle').classes('text-base text-slate-600 font-medium')
     ui.run(title="Orthonormal Basis Finder")
 
 if __name__ in {"__main__", "__mp_main__"}:
