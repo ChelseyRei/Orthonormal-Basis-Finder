@@ -52,7 +52,7 @@ def main():
         input_area.set_visibility(True)
 
         with input_area:
-            ui.label('Enter Values').classes(SECTION_HEADER)
+            ui.label('Enter Values').classes(CONFIG_HEADER)
             
             with ui.grid(columns=n_vectors).classes(INPUT_GRID):
                 for i in range(n_vectors):
@@ -130,7 +130,7 @@ def main():
             results_area.set_visibility(True)
             
             with results_area:
-                ui.label('Results').classes(SECTION_HEADER)
+                ui.label('Results').classes(CONFIG_HEADER)
                 
                 ui.label("Therefore, the Gram-Schmidt Process produced the following orthonormal basis for the subspace spanned by the given vectors:") \
                     .classes(RESULT_INSTRUCTION)
